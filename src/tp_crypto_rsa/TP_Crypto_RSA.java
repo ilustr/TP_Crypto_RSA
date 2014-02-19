@@ -19,12 +19,13 @@ public class TP_Crypto_RSA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
         BigInteger a, b;
+        String str ;
         
         Scanner sc = new Scanner(System.in);
+        /*
         System.out.println("Veuillez saisir un nombre :");
-        String str = sc.nextLine();
+        str = sc.nextLine();
         a = new BigInteger(str);
         System.out.println("Veuillez saisir un nombre :");
         str = sc.nextLine();
@@ -45,6 +46,21 @@ public class TP_Crypto_RSA {
         }else{
             System.out.println("=(");
         }
+        */
+        /////////////////////////////////////////////////////
+        // test euclide étendu
+        /////////////////////////////////////////////////////
+        
+        System.out.println("Veuillez saisir un nombre :");
+        str = sc.nextLine();
+        a = new BigInteger(str);
+        System.out.println("Veuillez saisir un nombre :");
+        str = sc.nextLine();
+        
+        b = new BigInteger(str);
+        
+        
+        System.out.println("euclide étendu de "+a+" et "+b+" est :" + PGCD.EuclideEtendu(a, b));
     }
     
 }
