@@ -7,23 +7,19 @@
 package tp_crypto_rsa;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 /**
  *
  * @author ilustr
  */
-public class PGCD {
+public class Fonctions {
     
-    private static BigInteger NBCONST_DEUX = new BigInteger("2");
-    private static BigInteger NBCONST_UN = new BigInteger("1");
-    private static BigInteger NBCONST_ZERO = new BigInteger("0");
-        
     public static BigInteger pgcd(BigInteger m, BigInteger n)
     {
+        BigInteger zero = new BigInteger("0");
         BigInteger r;
         
-        while ( n.compareTo(NBCONST_ZERO) != 0) {
+        while ( n.compareTo(zero) != 0) {
             r = m.mod(n);
             m = n;
             n = r;
@@ -34,13 +30,16 @@ public class PGCD {
     public static BigInteger exponentiation(BigInteger b,BigInteger c,BigInteger n)
     {
         BigInteger r = new BigInteger("1");
+        BigInteger deux = new BigInteger("2");
+        BigInteger un = new BigInteger("1");
+        BigInteger zero = new BigInteger("0");
         
-        while(c.compareTo(NBCONST_ZERO) != 0) {
-            if(c.and(r).compareTo(NBCONST_UN) == 0)
+        while(c.compareTo(zero) != 0) {
+            if(c.and(r).compareTo(un) == 0)
             {
                 r = r.multiply(b).mod(n);
             }
-            c.divide(NBCONST_DEUX);
+            c.divide(deux);
             b = b.multiply(b).mod(n);
         }
         return r;
@@ -62,14 +61,16 @@ public class PGCD {
 
     public static boolean estPremierLent(BigInteger n) {
 
+        BigInteger varZero = new BigInteger("0");
         BigInteger varI = new BigInteger("3");
+        BigInteger varTemp = new BigInteger("2");
         BigInteger m = sqrt(n);
 
-        if (n.mod(NBCONST_DEUX).compareTo(NBCONST_ZERO) == 0) {
-            return (n.compareTo(NBCONST_DEUX) == 0);
+        if (n.mod(varTemp).compareTo(varZero) == 0) {
+            return (n.compareTo(varTemp) == 0);
         }
         while (varI.compareTo(m) != 1) {
-            if ((n.mod(varI)).compareTo(NBCONST_ZERO) == 0) {
+            if ((n.mod(varI)).compareTo(varZero) == 0) {
                 return false;
             }
             varI = varI.add(new BigInteger("2"));
@@ -77,33 +78,8 @@ public class PGCD {
         return true;
     }
 
-    public static BigInteger EuclideEtendu (BigInteger a, BigInteger b)
+   /* public static boolean estProbablementPremier (BigInteger n)
     {
-        BigInteger q;
         
-        ArrayList<BigInteger> r = new ArrayList<>();
-        ArrayList<BigInteger> s = new ArrayList<>();
-        ArrayList<BigInteger> t = new ArrayList<>();
-        
-        r.add(a); r.add(b);
-        s.add(new BigInteger("1")); s.add(new BigInteger("0"));
-        t.add(new BigInteger("0")); t.add(new BigInteger("1"));
-
-        q = r.get(0).divide(r.get(1)); 
-        
-        r.add(r.get(0).subtract(q.multiply(r.get(1))));
-        
-        int i = 2;
-        while(r.get(i).compareTo(NBCONST_ZERO) > 0)
-        {
-            s.add(s.get(i-2).subtract(q.multiply(s.get(i-1))));
-            t.add(t.get(i-2).subtract(q.multiply(t.get(i-1))));
-            q = r.get(i-1).divide(r.get(i));
-            
-            i = i+1;
-            
-            r.add(r.get(i-2).subtract(q.multiply(r.get(i-1))));
-        }
-        return s.get(i-1);
-    }
+    }*/
 }
