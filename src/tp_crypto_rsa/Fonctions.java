@@ -75,14 +75,14 @@ public class Fonctions {
         return true;
     }
 
-    public static BigInteger randomBigInteger(BigInteger n) {
+    public static BigInteger randomBigInteger(BigInteger max, BigInteger min) {
         Random rnd = new Random();
-        int maxNumBitLength = n.bitLength();
+        int maxNumBitLength = max.bitLength();
         BigInteger aRandomBigInt;
-        do {
-            aRandomBigInt = new BigInteger(maxNumBitLength, rnd);
-            // compare random number lessthan ginven number
-        } while (aRandomBigInt.compareTo(n) > 0);
+        
+        aRandomBigInt = new BigInteger(maxNumBitLength, rnd);
+        aRandomBigInt = aRandomBigInt.mod(max).add(min);
+        
         return aRandomBigInt;
     }
 
@@ -109,7 +109,7 @@ public class Fonctions {
             vark = vark.add(ONE);
         }
         
-        BigInteger a = randomBigInteger(n.subtract(ONE));
+        BigInteger a = randomBigInteger(n.subtract(ONE), ONE);
         BigInteger b = a.modPow(varM, n);
         
         if ((b.mod(n)).compareTo(ZERO) == 0) {
@@ -156,5 +156,15 @@ public class Fonctions {
             r.add(r.get(i-2).subtract(q.multiply(r.get(i-1))));
         }
         return s.get(i-1);
+    }
+    
+    public static boolean estPremierRapide(BigInteger n,int k)
+    {
+        while ( k > 0 ) {
+          if (estProbablementPremier( n) ) 
+            return true;
+          k--;
+        }
+        return false;
     }
 }

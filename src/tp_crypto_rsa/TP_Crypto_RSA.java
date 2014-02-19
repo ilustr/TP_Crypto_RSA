@@ -47,7 +47,7 @@ public class TP_Crypto_RSA {
             System.out.println("=(");
         }
 
-        if(Fonctions.estProbablementPremier(varTest)){
+        if(Fonctions.estPremierRapide(varTest, 4)){
             System.out.println("Il est PROBABLEMENT premier !!!!");
         }else{
             System.out.println("PROBABLEMENT =(");
