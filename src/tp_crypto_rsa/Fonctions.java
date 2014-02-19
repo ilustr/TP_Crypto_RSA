@@ -6,6 +6,7 @@
 package tp_crypto_rsa;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -17,12 +18,12 @@ public class Fonctions {
     public static final BigInteger ZERO = BigInteger.ZERO;  // declaring constants
     public static final BigInteger ONE = BigInteger.ONE;
     public static final BigInteger TWO = BigInteger.valueOf(2);
-
-    public static BigInteger pgcd(BigInteger m, BigInteger n) {
-        BigInteger zero = new BigInteger("0");
+        
+    public static BigInteger pgcd(BigInteger m, BigInteger n)
+    {
         BigInteger r;
 
-        while (n.compareTo(zero) != 0) {
+        while (n.compareTo(ZERO) != 0) {
             r = m.mod(n);
             m = n;
             n = r;
@@ -32,15 +33,12 @@ public class Fonctions {
 
     public static BigInteger exponentiation(BigInteger b, BigInteger c, BigInteger n) {
         BigInteger r = new BigInteger("1");
-        BigInteger deux = new BigInteger("2");
-        BigInteger un = new BigInteger("1");
-        BigInteger zero = new BigInteger("0");
 
-        while (c.compareTo(zero) != 0) {
-            if (c.and(r).compareTo(un) == 0) {
+        while (c.compareTo(ZERO) != 0) {
+            if (c.and(r).compareTo(ONE) == 0) {
                 r = r.multiply(b).mod(n);
             }
-            c.divide(deux);
+            c.divide(TWO);
             b = b.multiply(b).mod(n);
         }
         return r;
@@ -64,7 +62,7 @@ public class Fonctions {
 
         BigInteger varI = new BigInteger("3");
         BigInteger m = sqrt(n);
-
+        
         if (n.mod(TWO).compareTo(ZERO) == 0) {
             return (n.compareTo(TWO) == 0);
         }
@@ -105,6 +103,7 @@ public class Fonctions {
         BigInteger vark = new BigInteger("0");
         BigInteger varM = n.subtract(ONE);
         
+        
         while ((varM.mod(TWO)).compareTo(ZERO) == 0) {
             varM = varM.shiftRight(1);
             vark = vark.add(ONE);
@@ -126,5 +125,36 @@ public class Fonctions {
             }
         }
         return false;
+    }
+    
+    
+    public static BigInteger EuclideEtendu (BigInteger a, BigInteger b)
+    {
+        BigInteger q;
+        
+        ArrayList<BigInteger> r = new ArrayList<>();
+        ArrayList<BigInteger> s = new ArrayList<>();
+        ArrayList<BigInteger> t = new ArrayList<>();
+        
+        r.add(a); r.add(b);
+        s.add(new BigInteger("1")); s.add(new BigInteger("0"));
+        t.add(new BigInteger("0")); t.add(new BigInteger("1"));
+
+        q = r.get(0).divide(r.get(1)); 
+        
+        r.add(r.get(0).subtract(q.multiply(r.get(1))));
+        
+        int i = 2;
+        while(r.get(i).compareTo(ZERO) > 0)
+        {
+            s.add(s.get(i-2).subtract(q.multiply(s.get(i-1))));
+            t.add(t.get(i-2).subtract(q.multiply(t.get(i-1))));
+            q = r.get(i-1).divide(r.get(i));
+            
+            i = i+1;
+            
+            r.add(r.get(i-2).subtract(q.multiply(r.get(i-1))));
+        }
+        return s.get(i-1);
     }
 }
