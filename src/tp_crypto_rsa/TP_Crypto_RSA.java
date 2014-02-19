@@ -20,7 +20,7 @@ public class TP_Crypto_RSA {
      */
     public static void main(String[] args) {
         
-        BigInteger a, b;
+       /* BigInteger a, b;
         
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir un nombre :");
@@ -32,7 +32,7 @@ public class TP_Crypto_RSA {
         b = new BigInteger(str);
         
         
-        System.out.println("pgcd de "+a+" et "+b+" est :" + Fonctions.pgcd(a, b));
+        System.out.println("pgcd de "+a+" et "+b+" est :" + Fonctions.pgcd(a, b));*/
         
         /////////////////////////////////////////////////////
         // test hecka
@@ -44,6 +44,12 @@ public class TP_Crypto_RSA {
             System.out.println("Il est premier !!!!");
         }else{
             System.out.println("=(");
+        }
+
+        if(Fonctions.estProbablementPremier(varTest)){
+            System.out.println("Il est PROBABLEMENT premier !!!!");
+        }else{
+            System.out.println("PROBABLEMENT =(");
         }
     }
     
