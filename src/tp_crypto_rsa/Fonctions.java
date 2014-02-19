@@ -12,7 +12,7 @@ import java.math.BigInteger;
  *
  * @author ilustr
  */
-public class PGCD {
+public class Fonctions {
     
     public static BigInteger pgcd(BigInteger m, BigInteger n)
     {

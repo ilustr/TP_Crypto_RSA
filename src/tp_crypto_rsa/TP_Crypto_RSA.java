@@ -32,7 +32,7 @@ public class TP_Crypto_RSA {
         b = new BigInteger(str);
         
         
-        System.out.println("pgcd de "+a+" et "+b+" est :" + PGCD.pgcd(a, b));
+        System.out.println("pgcd de "+a+" et "+b+" est :" + Fonctions.pgcd(a, b));
         
         /////////////////////////////////////////////////////
         // test hecka
@@ -40,7 +40,7 @@ public class TP_Crypto_RSA {
         
         BigInteger varTest = new BigInteger("2147483647");
         
-        if(PGCD.estPremierLent(varTest)){
+        if(Fonctions.estPremierLent(varTest)){
             System.out.println("Il est premier !!!!");
         }else{
             System.out.println("=(");
