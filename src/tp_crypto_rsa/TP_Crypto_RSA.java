@@ -60,7 +60,7 @@ public class TP_Crypto_RSA {
         b = new BigInteger(str);
         
         
-        System.out.println("euclide étendu de "+a+" et "+b+" est :" + PGCD.EuclideEtendu(a, b));
+        System.out.println("euclide étendu de "+a+" et "+b+" est :" + Fonctions.EuclideEtendu(a, b));
     }
     
 }
