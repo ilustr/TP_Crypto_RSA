@@ -18,6 +18,8 @@ public class Fonctions {
     public static final BigInteger ZERO = BigInteger.ZERO;  // declaring constants
     public static final BigInteger ONE = BigInteger.ONE;
     public static final BigInteger TWO = BigInteger.valueOf(2);
+    
+    private static Random rnd = new Random();
         
     public static BigInteger pgcd(BigInteger m, BigInteger n)
     {
@@ -76,7 +78,6 @@ public class Fonctions {
     }
 
     public static BigInteger randomBigInteger(BigInteger max, BigInteger min) {
-        Random rnd = new Random();
         int maxNumBitLength = max.bitLength();
         BigInteger aRandomBigInt;
         
@@ -157,6 +158,8 @@ public class Fonctions {
         }
         return s.get(i-1);
     }
+    
+    
     
     public static boolean estPremierRapide(BigInteger n,int k)
     {
