@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utils.Fichier;
 
 /**
  *
@@ -38,45 +39,40 @@ public class DeChiffre {
         BigInteger p = null, q = null, n = null, a = null, b = null;
         int t = 0;
         
-        String adressedufichier = System.getProperty("user.dir") + "/essai.priv";
-
+        String retour = "";
         try {
-
-            FileReader fr = new FileReader(adressedufichier);
-
-            BufferedReader input = new BufferedReader(fr);
-
-            String file = input.readLine();
-            
-            input.close();
-            
-            String keys[] = file.split(" ");
-            
-            t = Integer.parseInt(keys[0]);
-            n = new BigInteger(keys[1]);
-            p = new BigInteger(keys[2]);
-            q = new BigInteger(keys[3]);
-            a = new BigInteger(keys[4]);
-            b = new BigInteger(keys[5]);
-        
-        } catch (IOException ioe) {
-            System.out.print("Erreur : ");
-            ioe.printStackTrace();
+            retour = Fichier.lireFichier("essai.priv");
+        } catch (IOException ex) {
+            Logger.getLogger(DeChiffre.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        String adressedufichier = System.getProperty("user.dir") + "/essai.priv";
+        String keys[] = retour.split(" ");
 
+        t = Integer.parseInt(keys[0]);
+        n = new BigInteger(keys[1]);
+        p = new BigInteger(keys[2]);
+        q = new BigInteger(keys[3]);
+        a = new BigInteger(keys[4]);
+        b = new BigInteger(keys[5]);
         
         String clair = "";
-
-        Scanner sc = new Scanner(System.in);
 
         BigInteger[] code = new BigInteger[200];
         
         for (BigInteger crypt : code) {
-            crypt = Fonctions.pow(crypt, b);
-            crypt = crypt.modInverse(n);
+            crypt = crypt.modPow(b, n);
+            
+            //crypt = Fonctions.pow(crypt, b);
+            
+            //crypt = crypt.modInverse(n);
+            byte val[] = crypt.toByteArray();
+            
+            clair += new String(val);
             
         }
         
+        System.out.println("clair =>" + clair);
     }
     
 }
