@@ -58,14 +58,20 @@ public class DeChiffre {
         
         String clair = "";
 
-        BigInteger[] code = new BigInteger[200];
+        String msgCrypt = "";
+        try {
+            retour = Fichier.lireFichier("crypt.priv");
+        } catch (IOException ex) {
+            Logger.getLogger(DeChiffre.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        for (BigInteger crypt : code) {
+        String tbMSGCrypt[] = retour.split(" ");
+        
+        for (String strCrypt : tbMSGCrypt) {
+            
+            BigInteger crypt = new BigInteger(strCrypt);
             crypt = crypt.modPow(b, n);
             
-            //crypt = Fonctions.pow(crypt, b);
-            
-            //crypt = crypt.modInverse(n);
             byte val[] = crypt.toByteArray();
             
             clair += new String(val);
