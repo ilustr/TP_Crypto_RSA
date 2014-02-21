@@ -24,19 +24,26 @@ public class Chiffre {
 
         Scanner sc = new Scanner(System.in);
         String str;
-        int compteur = 0;
+        
         String retour = Fichier.lireFichier("essai.priv");
         String variable[] = retour.split(" ");
 
+        System.out.println("Message à chiffrer: ");
+        str = sc.nextLine();
+        
         int t = Integer.parseInt(variable[0]);
         BigInteger n = new BigInteger(variable[1]);
         BigInteger a = new BigInteger(variable[4]);
+        
+        String msgCrypt = cryptMsg( str, t, a, n);
+        
+        Fichier.creerFichier("crypt.priv",msgCrypt);
+    }
 
-        System.out.println("Message à chiffrer: ");
-        str = sc.nextLine();
+    public static String cryptMsg(String msg, int t, BigInteger key, BigInteger n) {
         //// create message by converting string to integer
-
-        byte[] bytes = str.getBytes();
+        int compteur = 0;
+        byte[] bytes = msg.getBytes();
         byte[] temp = new byte[t/8];
         String messCrypte ="";
         int i = 0;
@@ -45,7 +52,7 @@ public class Chiffre {
             if (compteur == t/8) {
                 BigInteger bloc = new BigInteger(temp);
                 System.out.println("Bloc : " + bloc);
-                messCrypte += bloc.modPow(a, n)+" ";
+                messCrypte += bloc.modPow(key, n)+" ";
                 compteur = 0;
                 temp = new byte[t/8];
             } else {
@@ -58,11 +65,12 @@ public class Chiffre {
         if (compteur != 0) {
             BigInteger mess = new BigInteger(temp);
             System.out.println("Bloc : " + mess);
-             messCrypte += mess.modPow(a, n);
+            messCrypte += mess.modPow(key, n);
         }
         
-         System.out.println("Message crypté: " + messCrypte);
-         Fichier.creerFichier("crypt.priv",messCrypte);
+        System.out.println("Message crypté: " + messCrypte);
+        
+        return messCrypte;
     }
 
 }

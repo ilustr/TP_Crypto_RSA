@@ -35,8 +35,7 @@ public class DeChiffre {
      */
     public static void main(String[] args) {
         
-        BigInteger phi = null;
-        BigInteger p = null, q = null, n = null, a = null, b = null;
+        BigInteger n, b;
         int t = 0;
         
         String retour = "";
@@ -51,12 +50,7 @@ public class DeChiffre {
 
         t = Integer.parseInt(keys[0]);
         n = new BigInteger(keys[1]);
-        p = new BigInteger(keys[2]);
-        q = new BigInteger(keys[3]);
-        a = new BigInteger(keys[4]);
         b = new BigInteger(keys[5]);
-        
-        String clair = "";
 
         String msgCrypt = "";
         try {
@@ -64,9 +58,14 @@ public class DeChiffre {
         } catch (IOException ex) {
             Logger.getLogger(DeChiffre.class.getName()).log(Level.SEVERE, null, ex);
         }
+        String clair = dcryptMSG(retour, b, n);
         
-        String tbMSGCrypt[] = retour.split(" ");
-        
+        System.out.println("clair =>" + clair);
+    }
+
+    public static String dcryptMSG(String msgCrypt, BigInteger b, BigInteger n) {
+        String clair = "";
+        String tbMSGCrypt[] = msgCrypt.split(" ");
         for (String strCrypt : tbMSGCrypt) {
             
             BigInteger crypt = new BigInteger(strCrypt);
@@ -77,8 +76,7 @@ public class DeChiffre {
             clair += new String(val);
             
         }
-        
-        System.out.println("clair =>" + clair);
+        return clair;
     }
     
 }
