@@ -5,8 +5,11 @@
  */
 package tp_crypto_rsa;
 
+import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
+import utils.Fichier;
 
 /**
  *
@@ -17,28 +20,43 @@ public class Chiffre {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner sc = new Scanner(System.in);
         String str;
-        int t;
-        int start = 0;
+        int compteur = 0;
+        String retour = Fichier.lireFichier("essai.priv");
+        String variable[] = retour.split(" ");
 
-        System.out.println("Taille de bloc (multiple de 32)");
-        str = sc.nextLine();
-        t = Integer.parseInt(str);
+        int t = Integer.parseInt(variable[0]);
+        BigInteger n = new BigInteger(variable[1]);
+        BigInteger a = new BigInteger(variable[4]);
 
         System.out.println("Message à chiffrer: ");
         str = sc.nextLine();
-        ArrayList<String> buffer = new ArrayList<>();
+        //// create message by converting string to integer
 
-        while (start + t < str.length()) {
-            buffer.add(str.substring(start, t));
-            start = start + t;
+        byte[] bytes = str.getBytes();
+        byte[] temp = new byte[t];
+        String messCrypte ="";
+        int i = 0;
+        while (i < bytes.length) {
+            if (compteur == t) {
+                BigInteger mess = new BigInteger(temp);
+                messCrypte += mess.modPow(a, n);
+                compteur = 0;
+            } else {
+                temp[compteur] = bytes[i];
+                compteur++;
+                i++;
+            }
         }
-        buffer.add(str.substring(start, str.length() - start));
-        
-        // Crypter avec le a qui est dans le fichier lire le fichier pour récuperer les valeurs sa serait plus intelligent
+        if (compteur != 0) {
+            BigInteger mess = new BigInteger(temp);
+             messCrypte += mess.modPow(a, n);
+        }
+         System.out.println("Message crypté: " + messCrypte);
+         Fichier.creerFichier("crypt.priv",messCrypte);
     }
 
 }
