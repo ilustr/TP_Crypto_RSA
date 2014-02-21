@@ -40,10 +40,12 @@ public class Chiffre {
         byte[] temp = new byte[t];
         String messCrypte ="";
         int i = 0;
+        
         while (i < bytes.length) {
             if (compteur == t) {
                 BigInteger mess = new BigInteger(temp);
-                messCrypte += mess.modPow(a, n);
+                System.out.println("Bloc : " + mess);
+                messCrypte += mess.modPow(a, n)+" ";
                 compteur = 0;
             } else {
                 temp[compteur] = bytes[i];
@@ -53,6 +55,7 @@ public class Chiffre {
         }
         if (compteur != 0) {
             BigInteger mess = new BigInteger(temp);
+            System.out.println("Bloc : " + mess);
              messCrypte += mess.modPow(a, n);
         }
          System.out.println("Message crypté: " + messCrypte);
