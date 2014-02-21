@@ -37,27 +37,30 @@ public class Chiffre {
         //// create message by converting string to integer
 
         byte[] bytes = str.getBytes();
-        byte[] temp = new byte[t];
+        byte[] temp = new byte[t/8];
         String messCrypte ="";
         int i = 0;
         
         while (i < bytes.length) {
-            if (compteur == t) {
-                BigInteger mess = new BigInteger(temp);
-                System.out.println("Bloc : " + mess);
-                messCrypte += mess.modPow(a, n)+" ";
+            if (compteur == t/8) {
+                BigInteger bloc = new BigInteger(temp);
+                System.out.println("Bloc : " + bloc);
+                messCrypte += bloc.modPow(a, n)+" ";
                 compteur = 0;
+                temp = new byte[t/8];
             } else {
                 temp[compteur] = bytes[i];
                 compteur++;
                 i++;
             }
         }
+        
         if (compteur != 0) {
             BigInteger mess = new BigInteger(temp);
             System.out.println("Bloc : " + mess);
              messCrypte += mess.modPow(a, n);
         }
+        
          System.out.println("Message crypté: " + messCrypte);
          Fichier.creerFichier("crypt.priv",messCrypte);
     }
