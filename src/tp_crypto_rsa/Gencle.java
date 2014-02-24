@@ -66,18 +66,20 @@ public class Gencle {
         // Notons : n = p*q et φ = (p-1)*(q-1)
         n = p.multiply(q);
         phi = (p.subtract(Fonctions.ONE)).multiply(q.subtract(Fonctions.ONE));
+        
         System.out.println("n :" + n);
         System.out.println("phi :" + phi);
         //Soient d un grand entier « aléatoirement » choisi, premier avec φ
         do {
             a = Fonctions.randomBigInteger(max, min);
         } while ((Fonctions.pgcd(a, phi)).compareTo(Fonctions.ONE) != 0);
+        
         System.out.println("public key a :" + a);
         b = Fonctions.EuclideEtendu(a, phi);
 
         System.out.println("private key b :" + b);
         String ecriture = t+" "+n.toString()+" "+p.toString()+" "+q.toString()+" "+a.toString()+" "+b.toString();
-        //Fichier.creerFichier(filename,ecriture);
+        Fichier.creerFichier(filename,ecriture);
     }
  
 }

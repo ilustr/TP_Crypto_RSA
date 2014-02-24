@@ -14,7 +14,7 @@ public class Signature {
     public static void main(String[] args) {
      // Faire Sha1 du mot
         // Crypter avec clé privé de A
-     // Envoyer le mot a l'autre B
+     // Envoyer le sha1 a l'autre B
      // Décrypter avec clé publique de A
      // Comparer Sha1 avec Sha1 du message reçu
     }
