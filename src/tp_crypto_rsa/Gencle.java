@@ -38,7 +38,7 @@ public class Gencle {
         int t;
         String str;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Taille de bloc (multiple de 32)");
+        System.out.println("Taille de bloc (multiple de 8)");
         str = sc.nextLine();
         t = Integer.parseInt(str);
         
