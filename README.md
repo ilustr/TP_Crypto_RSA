@@ -35,5 +35,5 @@ Cette classe nous permet de jouer l'ensemble d'une communication entre deux pers
 - Verification des deux Sha1
 
 Exemple d'utilisation : 
--taille des blocs : 512, 1024
+- taille des blocs : 512, 1024
 - mot a envoyer : Bonjour ceci est le message crypté que je vous ai envoyé, Adversus periculum naturalis ratio permittit se defendere
