@@ -74,15 +74,10 @@ public class Gencle {
         } while ((Fonctions.pgcd(a, phi)).compareTo(Fonctions.ONE) != 0);
         System.out.println("public key a :" + a);
         b = Fonctions.EuclideEtendu(a, phi);
-        BigInteger b1 = a.modInverse(phi);
-        /**
-         * TODO
-         * EuclideEtendu a revoir !! Renvoi des fois des nombres négatifs !!
-         */
-        System.out.println("private key algo aurel b :" + b);
-        System.out.println("private key  vrai algo b1 :" + b1);
-        String ecriture = t+" "+n.toString()+" "+p.toString()+" "+q.toString()+" "+a.toString()+" "+b1.toString();
-        Fichier.creerFichier(filename,ecriture);
+
+        System.out.println("private key b :" + b);
+        String ecriture = t+" "+n.toString()+" "+p.toString()+" "+q.toString()+" "+a.toString()+" "+b.toString();
+        //Fichier.creerFichier(filename,ecriture);
     }
  
 }

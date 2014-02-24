@@ -156,7 +156,10 @@ public class Fonctions {
             
             r.add(r.get(i-2).subtract(q.multiply(r.get(i-1))));
         }
-        return s.get(i-1);
+        
+        BigInteger retour = (s.get(i-1).compareTo(BigInteger.ZERO) >= 0)?s.get(i-1):s.get(i-1).add(b);
+        
+        return retour;
     }
     
     
