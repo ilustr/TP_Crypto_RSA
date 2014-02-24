@@ -10,6 +10,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +32,6 @@ public class Cryptage {
         for (int i = 0; i < result.length; i++) {
             sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
         }
-        System.out.println("Crypter: "+sb.toString());
         return sb.toString();
     }
     
@@ -40,8 +41,18 @@ public class Cryptage {
      * @param sha1 : sha1 a comparer
      * @return 
      */
-    public Boolean compareSHA1(String mot, String sha1) throws NoSuchAlgorithmException{
-        String sha1AComparer = Cryptage.encoderEnSHA1(mot);
-        return sha1AComparer.equals(sha1);
+    public static Boolean compareSHA1(String mot, String sha1){
+        
+        String sha1AComparer="";
+        String sha1WithoutSpace = "";
+        try {
+            sha1AComparer = Cryptage.encoderEnSHA1(mot);
+            sha1WithoutSpace = sha1.trim();
+
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Cryptage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return sha1AComparer.equals(sha1WithoutSpace);
     }
 }

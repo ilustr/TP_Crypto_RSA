@@ -23,7 +23,7 @@ public class TP_Crypto_RSA {
         String str ;
         
         Scanner sc = new Scanner(System.in);
-        /*
+        
         System.out.println("Veuillez saisir un nombre :");
         str = sc.nextLine();
         a = new BigInteger(str);
@@ -33,7 +33,7 @@ public class TP_Crypto_RSA {
         b = new BigInteger(str);
         
         
-        System.out.println("pgcd de "+a+" et "+b+" est :" + Fonctions.pgcd(a, b));*/
+        System.out.println("pgcd de "+a+" et "+b+" est :" + Fonctions.pgcd(a, b));
         
         /////////////////////////////////////////////////////
         // test hecka

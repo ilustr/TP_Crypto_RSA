@@ -42,6 +42,7 @@ public class Chiffre {
 
     public static String cryptMsg(String msg, int t, BigInteger key, BigInteger n) {
         //// create message by converting string to integer
+        System.out.println("----------------------------- CRYPTAGE MESSAGE -----------------------------");
         int compteur = 0;
         byte[] bytes = msg.getBytes();
         byte[] temp = new byte[t/8];
@@ -51,7 +52,6 @@ public class Chiffre {
         while (i < bytes.length) {
             if (compteur == t/8) {
                 BigInteger bloc = new BigInteger(temp);
-                System.out.println("Bloc : " + bloc);
                 messCrypte += bloc.modPow(key, n)+" ";
                 compteur = 0;
                 temp = new byte[t/8];
@@ -64,11 +64,10 @@ public class Chiffre {
         
         if (compteur != 0) {
             BigInteger mess = new BigInteger(temp);
-            System.out.println("Bloc : " + mess);
             messCrypte += mess.modPow(key, n);
         }
         
-        System.out.println("Message crypté: " + messCrypte);
+        System.out.println("-------- Message crypté: " + messCrypte);
         
         return messCrypte;
     }

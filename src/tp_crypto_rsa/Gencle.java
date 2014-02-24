@@ -35,16 +35,23 @@ public class Gencle {
     }
 
     public static void createKeys(String filename) throws NumberFormatException {
-        BigInteger phi;
-        BigInteger p, q, n, a, b;
-        BigInteger min, max;
         int t;
         String str;
         Scanner sc = new Scanner(System.in);
         System.out.println("Taille de bloc (multiple de 32)");
         str = sc.nextLine();
         t = Integer.parseInt(str);
-        System.out.println("Generation aléatoire de deux entiers premiers :");
+        
+        createKeys(filename, t);
+    }
+
+    public static void createKeys(String filename, int tailleBloc) throws NumberFormatException {
+        BigInteger phi;
+        BigInteger p, q, n, a, b;
+        BigInteger min, max;
+        int t = tailleBloc;
+        
+        System.out.println("----------------------------- GENERATION DE CLES -----------------------------");
         min = new BigInteger("1");
         max = new BigInteger("1");
         for (int i = 0; i < (t / 2); i++) {
@@ -61,23 +68,23 @@ public class Gencle {
         do {
             q = Fonctions.randomBigInteger(max, min);
         } while (!Fonctions.estPremierRapide(q, 4));
-        System.out.println("clé p :" + p);
-        System.out.println("clé q :" + q);
+        System.out.println("-------- p :" + p);
+        System.out.println("-------- q :" + q);
         // Notons : n = p*q et φ = (p-1)*(q-1)
         n = p.multiply(q);
         phi = (p.subtract(Fonctions.ONE)).multiply(q.subtract(Fonctions.ONE));
-        System.out.println("n :" + n);
-        System.out.println("phi :" + phi);
+        System.out.println("-------- n: " + n);
+        System.out.println("-------- phi: " + phi);
         //Soient d un grand entier « aléatoirement » choisi, premier avec φ
         do {
             a = Fonctions.randomBigInteger(max, min);
         } while ((Fonctions.pgcd(a, phi)).compareTo(Fonctions.ONE) != 0);
-        System.out.println("public key a :" + a);
+        System.out.println("-------- Clé publique a: " + a);
         b = Fonctions.EuclideEtendu(a, phi);
 
-        System.out.println("private key b :" + b);
+        System.out.println("-------- Clé privée b: " + b);
         String ecriture = t+" "+n.toString()+" "+p.toString()+" "+q.toString()+" "+a.toString()+" "+b.toString();
-        //Fichier.creerFichier(filename,ecriture);
+        Fichier.creerFichier(filename,ecriture);
     }
  
 }

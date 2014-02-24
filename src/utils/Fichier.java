@@ -52,7 +52,7 @@ public class Fichier {
 
             output.close();
             //et on le ferme
-            System.out.println("fichier créé");
+            System.out.println("Fichier: "+nomFic+" créé");
         } catch (IOException ioe) {
             System.out.print("Erreur : ");
             ioe.printStackTrace();

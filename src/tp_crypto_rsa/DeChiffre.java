@@ -64,6 +64,7 @@ public class DeChiffre {
     }
 
     public static String dcryptMSG(String msgCrypt, BigInteger b, BigInteger n) {
+        System.out.println("----------------------------- DECRYPTAGE MESSAGE -----------------------------");
         String clair = "";
         String tbMSGCrypt[] = msgCrypt.split(" ");
         for (String strCrypt : tbMSGCrypt) {
